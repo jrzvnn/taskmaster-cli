@@ -1,38 +1,34 @@
 #!/usr/bin/env bash
 
-# Display the current to-do list
-python todo.py display
+# This bash script serves as the entry point for the to-do list tool.
+# It handles user input and invokes the appropriate functions in the Python script.
 
-echo "Enter a command (add, complete, display):"
+# The path to the Python script
+SCRIPT_PATH='./todo.py'
 
 # Read a single line of input from the user
-# shellcheck disable=SC2162
-read command
+read -r INPUT 
 
-case $command in
-  # If the user entered "add", ask for the item to add
-  add)
-    echo "Enter the item to add:"
-    # shellcheck disable=SC2162
-    read item
-    python todo.py add "$item"
-    ;;
+# Split the input into an array of words
+WORDS=($INPUT)
 
-  # If the user entered "complete", ask for the item to mark as complete
-  complete)
-    echo "Enter the item to mark as complete:"
-    # shellcheck disable=SC2162
-    read item
-    python todo.py complete "$item"
-    ;;
+# The first word is the command
+COMMAND=${WORDS[0]}
 
-  # If the user entered "display", display the current to-do list
-  display)
-    python todo.py display
-    ;;
+# The rest of the words are the arguments
+ARGS=${WORDS[@]:1}
 
-  # If the user entered an invalid command, display an error message
-  *)
-    echo "Invalid command"
-    ;;
-esac
+# Invoke the appropriate function in the python script
+if [ "${COMMAND}" == 'add' ]; then
+    python "$SCRIPT_PATH" add "$ARGS"
+elif [ "${COMMAND}" == 'complete' ]; then
+    python "$SCRIPT_PATH" complete "$ARGS"
+elif [ "${COMMAND}" == 'delete' ]; then
+    python "$SCRIPT_PATH" delete "$ARGS"
+elif [ "${COMMAND}" == 'clear' ]; then
+    python "$SCRIPT_PATH" clear 
+elif [ "${COMMAND}" == 'display' ]; then
+    python "$SCRIPT_PATH" display 
+else
+  echo "Unrecognized command: $COMMAND"
+fi  

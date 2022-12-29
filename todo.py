@@ -1,35 +1,96 @@
-import os
+#!/usr/bin/env python
+
+"""
+ This Python script stores and retrieves to-do list items from a text file.
+ It has functions for adding a new item, marking an item as completed, deleting
+ an item, clearing the to-do list, and displaying the current to-do list.
+"""
+
+import sys
+
+
+# The path to the to-do list text file
+TODO_FILE = 'todo.txt'
 
 
 def add_item(item):
-    # Open the to-do list file in append mode
-    with open("todo.txt", "a") as f:
-        # Add the new item to the file
-        f.write(item + "\n")
-        print("success")
-
+    """Add a new item to the to-do list."""
+    with open(TODO_FILE, 'a') as f:
+        f.write(item + '\n')
+    
 
 def mark_complete(item):
-    # Read the current to-do list
-    with open("todo.txt", "r") as f:
-        items = f.readlines()
-
-    # Overwrite the to-do list file with the updated list
-    with open("todo.txt", "w") as f:
-        for i in items:
-            # If the item matches the item we want to mark as complete,
-            # prefix it with a '[x]' to indicate it's done
-            if i.strip() == item:
-                f.write("[x] " + i)
+    """Mark an item as complete in the to-do list."""
+    items = []
+    with open(TODO_FILE, 'r') as f:
+        for line in f:
+            line = line.strip()
+            if line == item:
+                items.append('[x] ' + line)
             else:
-                f.write(i)
+                items.append(line)
+    with open(TODO_FILE, 'w') as f:
+        for item in items:
+            f.write(item + '\n')
+
+
+def delete_item(item):
+  """Delete an item from the to-do list."""
+  items = []
+  with open(TODO_FILE, 'r') as f:
+    for line in f:
+      line = line.strip()
+      if line != item:
+        items.append(line)
+  with open(TODO_FILE, 'w') as f:
+    for item in items:
+      f.write(item + '\n')
+
+def clear_list():
+    """Clear the to-do list"""
+    with open(TODO_FILE, 'w') as f:
+        f.write('')
 
 
 def display_list():
-    # Read the current to-do list
-    with open("todo.txt", "r") as f:
-        items = f.readlines()
+    """Display the current to-do list"""
+    with open(TODO_FILE, 'r') as f:
+        for line in f:
+            print(line.strip())
 
-        # Print the to-do list
-        for i, item in enumerate(items):
-            print(f"{i+1}. {item.strip()}")
+
+def main():
+    """Handle command-line arguments and invoke the appropriate function."""
+    if len(sys.argv) < 2:
+        print('Usage: python todo.py [add|complete|delete|clear|display] ITEM')
+        sys.exit(1)
+    
+    command = sys.argv[1]
+    if command == 'add':
+        if len(sys.argv) != 3:
+            print('UsageL python todo.py add ITEM')
+            sys.exit(1)
+        item = sys.argv[2]
+        add_item(item)
+    elif command == 'complete':
+        if len(sys.argv) != 3:
+            print('Usage: python todo.py complete ITEM')
+            sys.exit(1)
+        item = sys.argv[2]
+        mark_complete(item)
+    elif command == 'delete':
+        if len(sys.argv) != 3:
+            print('Usage: python todo.py delete ITEM')
+            sys.exit(1)
+        item = sys.argv[2]
+        delete_item(item)
+    elif command == 'clear':
+        clear_list()
+    elif command == 'display':
+        display_list()
+    else:
+        print(f"Unrecognized command: {command}")
+
+
+if __name__ == '__main__':
+    main()
