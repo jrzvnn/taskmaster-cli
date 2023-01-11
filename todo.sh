@@ -20,15 +20,15 @@ ARGS=${WORDS[@]:1}
 
 # Invoke the appropriate function in the python script
 if [ "${COMMAND}" == 'add' ]; then
-    python "$SCRIPT_PATH" add "$ARGS"
+    python3 "$SCRIPT_PATH" add "$ARGS"
 elif [ "${COMMAND}" == 'complete' ]; then
-    python "$SCRIPT_PATH" complete "$ARGS"
+    python3 "$SCRIPT_PATH" complete "$ARGS"
 elif [ "${COMMAND}" == 'delete' ]; then
-    python "$SCRIPT_PATH" delete "$ARGS"
+    python3 "$SCRIPT_PATH" delete "$ARGS"
 elif [ "${COMMAND}" == 'clear' ]; then
-    python "$SCRIPT_PATH" clear 
+    python3 "$SCRIPT_PATH" clear 
 elif [ "${COMMAND}" == 'display' ]; then
-    python "$SCRIPT_PATH" display 
+    python3 "$SCRIPT_PATH" display 
 else
   echo "Unrecognized command: $COMMAND"
 fi  

@@ -6,6 +6,9 @@ Taskmaster-CLI is a command-line tool for managing a to-do list. It has the foll
 * Clear the entire to-do list
 * Display the current to-do list
 
+This tool help user to maintain the To-do list.
+and it could be used on day to day tasks as well as it could be used as a reminder.
+
 ## Requirements
 Taskmaster-CLI requires Python 3 and Bash to be installed on your system.
 
