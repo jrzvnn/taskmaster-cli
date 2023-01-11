@@ -6,8 +6,7 @@ Taskmaster-CLI is a command-line tool for managing a to-do list. It has the foll
 * Clear the entire to-do list
 * Display the current to-do list
 
-This tool help user to maintain the To-do list.
-and it could be used on day to day tasks as well as it could be used as a reminder.
+This tool help user to maintain the To-do list and it could be used on day to day tasks as well as it could be used as a reminder.
 
 ## Requirements
 Taskmaster-CLI requires Python 3 and Bash to be installed on your system.
@@ -29,9 +28,9 @@ $ ./todo.sh
 ```
 You will be prompted to enter a command. The following commands are available:
 
-* add ITEM: Add a new item to the to-do list. Replace ITEM with the text of the item you want to add.
-* complete ITEM: Mark an item as complete in the to-do list. Replace ITEM with the text of the item you want to mark as complete.
-* delete ITEM: Delete an item from the to-do list. Replace ITEM with the text of the item you want to delete.
+* add item: Add a new item to the to-do list. Replace item with the text of the item you want to add.
+* complete item: Mark an item as complete in the to-do list. Replace item with the text of the item you want to mark as complete.
+* delete item: Delete an item from the to-do list. Replace item with the text of the item you want to delete.
 * clear: Clear the entire to-do list.
 * display: Display the current to-do list.
 
